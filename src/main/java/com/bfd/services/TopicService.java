@@ -17,5 +17,5 @@ public interface TopicService {
 
 	public void deleteTopic(Long topicId);
 	
-	public List<Topic> getTopicByUserId(Long userId);
+	public List<Topic> getTopicByUsername(String username);
 }

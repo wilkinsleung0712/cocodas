@@ -18,7 +18,7 @@ public interface TopicDao extends CrudRepository<Topic, Long>{
 	
 	public List<Topic> findAll();
 	
-	public List<Topic> findByUser(Long userId);
+	public List<Topic> findByUsername(String username);
 	
 }
 

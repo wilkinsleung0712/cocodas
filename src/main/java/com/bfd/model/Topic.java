@@ -12,8 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -34,10 +36,16 @@ public class Topic {
     @JsonIgnore
     @JoinColumn(name="userId")
     private User user;
+    
+    private String username;
 
     private int likedVote;
+    
+    @Transient //Hibernate will ignore and wont create a field
+    private MultipartFile topicImage;
 
-    @CreationTimestamp
+
+	@CreationTimestamp
     private Date createdDate;
 
     public Topic() {
@@ -134,5 +142,21 @@ public class Topic {
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+    public MultipartFile getProductImage() {
+		return topicImage;
+	}
+
+	public void setProductImage(MultipartFile productImage) {
+		this.topicImage = productImage;
+	}
 
 }

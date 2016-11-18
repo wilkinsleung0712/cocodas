@@ -42,8 +42,8 @@ public class TopicServiceImpl implements TopicService{
 	}
 
 	@Override
-	public List<Topic> getTopicByUserId(Long userId) {
-		return topicDao.findByUser(userId);
+	public List<Topic> getTopicByUsername(String username) {
+		return topicDao.findByUsername(username);
 	}
 
 }

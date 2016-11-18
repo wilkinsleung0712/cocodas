@@ -19,28 +19,40 @@ public class TopicResource {
 	@Autowired
 	private TopicService topicService;
 
+	// add
 	@RequestMapping(value = "/topic/add", method = RequestMethod.POST)
 	public Topic addTopic(@RequestBody Topic topic) {
 		return topicService.save(topic);
 	}
-
-	@RequestMapping(value = "/topic/view/{topicId}", method = RequestMethod.POST)
+	
+	//read
+	@RequestMapping(value = "/topic/view/{topicId}", method = RequestMethod.GET)
 	public Topic viewTopic(@PathVariable Long topicId) {
 		return topicService.getTopicById(topicId);
 	}
 
-	@RequestMapping(value = "/topic/update", method = RequestMethod.POST)
-	public Topic updateTopic(@RequestBody Topic topic) {
-		return topicService.save(topic);
-	}
+//	@RequestMapping(value = "/topic/update", method = RequestMethod.PUT)
+//	public Topic updateTopic(@RequestBody Topic topic) {
+//		return topicService.save(topic);
+//	}
 
+
+	
+	@RequestMapping(value = "/topic/view/user/{username}",method=RequestMethod.GET)
+	public List<Topic> getTopicsByUser(@PathVariable String username){
+		return topicService.getTopicByUsername(username);
+	}
+	
+	//update
+//	@RequestMapping(value="/topic/update",method=RequestMethod.POST)
+//	public Topic editTopic(@RequestBody Topic topic){
+//		return topicService.save(topic);
+//	}
+	
+	//delete
 	@RequestMapping(value = "/topic/delete/{topicId}", method = RequestMethod.POST)
 	public void deleteTopic(@PathVariable Long topicId) {
 		topicService.deleteTopic(topicId);
 	}
 	
-	@RequestMapping(value = "/topic/view/user/{userId}",method=RequestMethod.GET)
-	public List<Topic> getTopicsByUser(@PathVariable Long userId){
-		return topicService.getTopicByUserId(userId);
-	}
 }
