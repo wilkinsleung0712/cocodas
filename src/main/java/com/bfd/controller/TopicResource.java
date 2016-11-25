@@ -44,10 +44,10 @@ public class TopicResource {
 	}
 	
 	//update
-//	@RequestMapping(value="/topic/update",method=RequestMethod.POST)
-//	public Topic editTopic(@RequestBody Topic topic){
-//		return topicService.save(topic);
-//	}
+	@RequestMapping(value="/topic/update",method=RequestMethod.POST)
+	public Topic editTopic(@RequestBody Topic topic){
+		return topicService.save(topic);
+	}
 	
 	//delete
 	@RequestMapping(value = "/topic/delete/{topicId}", method = RequestMethod.POST)

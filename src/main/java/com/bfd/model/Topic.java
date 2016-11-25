@@ -21,127 +21,126 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Topic {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long topicId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long topicId;
 
-    private String topicTitle;
-    private String topicDescription;
+	private String topicTitle;
+	private String topicDescription;
 
-    @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonIgnore
-    private List<Comment> listOfComments;
+	@OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JsonIgnore
+	private List<Comment> listOfComments;
 
-    @ManyToOne
-    @JsonIgnore
-    @JoinColumn(name="userId")
-    private User user;
-    
-    private String username;
+	@ManyToOne
+	@JsonIgnore
+	@JoinColumn(name = "userId")
+	private User user;
 
-    private int likedVote;
-    
-    @Transient //Hibernate will ignore and wont create a field
-    private MultipartFile topicImage;
+	private String username;
 
+	private int likedVote;
+
+	@Transient // Hibernate will ignore and wont create a field
+	private MultipartFile topicImage;
 
 	@CreationTimestamp
-    private Date createdDate;
+	private Date createdDate;
 
-    public Topic() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	public Topic() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-    /**
-     * @return the topicId
-     */
-    public long getTopicId() {
-        return topicId;
-    }
+	/**
+	 * @return the topicId
+	 */
+	public long getTopicId() {
+		return topicId;
+	}
 
-    /**
-     * @param topicId
-     *            the topicId to set
-     */
-    public void setTopicId(long topicId) {
-        this.topicId = topicId;
-    }
+	/**
+	 * @param topicId
+	 *            the topicId to set
+	 */
+	public void setTopicId(long topicId) {
+		this.topicId = topicId;
+	}
 
-    /**
-     * @return the topicTitle
-     */
-    public String getTopicTitle() {
-        return topicTitle;
-    }
+	/**
+	 * @return the topicTitle
+	 */
+	public String getTopicTitle() {
+		return topicTitle;
+	}
 
-    /**
-     * @param topicTitle
-     *            the topicTitle to set
-     */
-    public void setTopicTitle(String topicTitle) {
-        this.topicTitle = topicTitle;
-    }
+	/**
+	 * @param topicTitle
+	 *            the topicTitle to set
+	 */
+	public void setTopicTitle(String topicTitle) {
+		this.topicTitle = topicTitle;
+	}
 
-    /**
-     * @return the topicDescription
-     */
-    public String getTopicDescription() {
-        return topicDescription;
-    }
+	/**
+	 * @return the topicDescription
+	 */
+	public String getTopicDescription() {
+		return topicDescription;
+	}
 
-    /**
-     * @param topicDescription
-     *            the topicDescription to set
-     */
-    public void setTopicDescription(String topicDescription) {
-        this.topicDescription = topicDescription;
-    }
+	/**
+	 * @param topicDescription
+	 *            the topicDescription to set
+	 */
+	public void setTopicDescription(String topicDescription) {
+		this.topicDescription = topicDescription;
+	}
 
-    /**
-     * @return the listOfComments
-     */
-    public List<Comment> getListOfComments() {
-        return listOfComments;
-    }
+	/**
+	 * @return the listOfComments
+	 */
+	public List<Comment> getListOfComments() {
+		return listOfComments;
+	}
 
-    /**
-     * @param listOfComments
-     *            the listOfComments to set
-     */
-    public void setListOfComments(List<Comment> listOfComments) {
-        this.listOfComments = listOfComments;
-    }
+	/**
+	 * @param listOfComments
+	 *            the listOfComments to set
+	 */
+	public void setListOfComments(List<Comment> listOfComments) {
+		this.listOfComments = listOfComments;
+	}
 
-    /**
-     * @return the likedVote
-     */
-    public int getLikedVote() {
-        return likedVote;
-    }
+	/**
+	 * @return the likedVote
+	 */
+	public int getLikedVote() {
+		return likedVote;
+	}
 
-    /**
-     * @param likedVote
-     *            the likedVote to set
-     */
-    public void setLikedVote(int likedVote) {
-        this.likedVote = likedVote;
-    }
+	/**
+	 * @param likedVote
+	 *            the likedVote to set
+	 */
+	public void setLikedVote(int likedVote) {
+		this.likedVote = likedVote;
+	}
 
-    /**
-     * @return the createdDate
-     */
-    public Date getCreatedDate() {
-        return createdDate;
-    }
+	/**
+	 * @return the createdDate
+	 */
+	public Date getCreatedDate() {
+		return createdDate;
+	}
 
-    /**
-     * @param createdDate
-     *            the createdDate to set
-     */
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
+	/**
+	 * @param createdDate
+	 *            the createdDate to set
+	 */
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
 
 	public String getUsername() {
 		return username;
@@ -151,12 +150,26 @@ public class Topic {
 		this.username = username;
 	}
 
-    public MultipartFile getProductImage() {
+	public MultipartFile getProductImage() {
 		return topicImage;
 	}
 
 	public void setProductImage(MultipartFile productImage) {
 		this.topicImage = productImage;
+	}
+
+	// custom method
+	public Comment getCommentByCommentId(long commentId) {
+		for (Comment comment : listOfComments) {
+			if (comment.getCommentId() == commentId) {
+				return comment;
+			}
+		}
+		// this should not be happening
+		// log a error message
+		System.out
+				.println("warning: trying to find comment that is not in the topic -> " + topicId + " ->" + commentId);
+		return null;
 	}
 
 }

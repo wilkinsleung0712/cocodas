@@ -1,5 +1,7 @@
 package com.bfd.dao;
 
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,4 +15,6 @@ public interface CommentDao extends CrudRepository<Comment, Long>{
 	public Comment save(Comment comment);
 	
 	public void findCommentByUserAndTopic(User user, Topic topic);
+	
+	public List<Comment> findByTopicId(long topicId);
 }

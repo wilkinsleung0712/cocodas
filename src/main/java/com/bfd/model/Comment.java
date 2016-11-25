@@ -30,6 +30,10 @@ public class Comment {
     @JoinColumn
     private Topic topic;
     
+    private Long topicId;
+    
+    private String username;
+    
     @CreationTimestamp
     private Date commentDate;
 
@@ -108,6 +112,22 @@ public class Comment {
     public void setCommentDate(Date commentDate) {
         this.commentDate = commentDate;
     }
+
+	public Long getTopicId() {
+		return topicId;
+	}
+
+	public void setTopicId(Long topicId) {
+		this.topicId = topicId;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
     
     
 }
