@@ -25,12 +25,6 @@ public class TopicResource {
 		return topicService.save(topic);
 	}
 	
-	//read
-	@RequestMapping(value = "/topic/view/{topicId}", method = RequestMethod.GET)
-	public Topic viewTopic(@PathVariable Long topicId) {
-		return topicService.getTopicById(topicId);
-	}
-
 //	@RequestMapping(value = "/topic/update", method = RequestMethod.PUT)
 //	public Topic updateTopic(@RequestBody Topic topic) {
 //		return topicService.save(topic);

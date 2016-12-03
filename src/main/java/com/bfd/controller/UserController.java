@@ -1,6 +1,7 @@
 package com.bfd.controller;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -26,7 +27,7 @@ public class UserController {
 
 	// RequestMethod.POST
 	@RequestMapping(value = "login", method = RequestMethod.POST)
-	public String login(@RequestBody Map<String, String> userLoginDetail) throws ServletException {
+	public Map<String,String> login(@RequestBody Map<String, String> userLoginDetail) throws ServletException {
 		// 1.check user login detail
 		if (userLoginDetail.get("username") == null || userLoginDetail.get("username").trim().isEmpty()
 				|| userLoginDetail.get("password") == null || userLoginDetail.get("password").trim().isEmpty()) {
@@ -46,8 +47,11 @@ public class UserController {
 			throw new ServletException("User password not correct.");
 		}
 		// 3.if it does match send back Jwt token and the customer has to include the token header every request.
-		return Jwts.builder().setSubject(username).claim("roles", "user").setIssuedAt(new Date())
+		Map<String,String> tokenJSON = new HashMap<>();
+		String token = Jwts.builder().setSubject(username).claim("roles", "user").setIssuedAt(new Date())
 				.signWith(SignatureAlgorithm.HS256, "securetkey").compact();
+		tokenJSON.put("token", token);
+		return tokenJSON;
 	}
 
 	@RequestMapping(value = "register", method = RequestMethod.POST)
