@@ -158,6 +158,23 @@ public class Topic {
 		this.topicImage = productImage;
 	}
 
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public MultipartFile getTopicImage() {
+		return topicImage;
+	}
+
+	public void setTopicImage(MultipartFile topicImage) {
+		this.topicImage = topicImage;
+	}
+
 	// custom method
 	public Comment getCommentByCommentId(long commentId) {
 		for (Comment comment : listOfComments) {
